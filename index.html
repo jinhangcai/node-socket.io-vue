@@ -88,9 +88,9 @@
         mounted:function(){
             var _this = this;
             var obj = {};
-            socket.on('chat message', function(msg,id,color){
+            socket.on('chat message', function(msg,id,color,name){
                 obj = {};
-                obj.name = _this.name;
+                obj.name = name;
                 obj.values = msg;
                 obj.left = _this.impID == id ? 'right' :'left';
                 obj.color = _this.activeColor;
@@ -125,7 +125,7 @@
                 var _this = this;
                 var html =  $('#editor').html();
                 if(html == '') return;
-                socket.emit('chat message',html,_this.activeColor);
+                socket.emit('chat message',html,_this.activeColor,_this.name);
                 $('#editor').html('')
             },
             userClick:function(){

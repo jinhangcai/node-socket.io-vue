@@ -28,7 +28,9 @@ io.sockets.on('connection', function(socket){
             return;
         }else{
             username.push(objs.username)
+            socket.nickname = objs.username;
             socket.userIndex = username.length;
+            console.log( socket.nickname)
         }
         if(!onlineUsers.hasOwnProperty(objs.userid)) {
             onlineUsers[objs.userid] = objs.username;
@@ -42,27 +44,29 @@ io.sockets.on('connection', function(socket){
 
         //接收用户退出信息
         socket.on(objs.userid+'out',function(obj){
-                socket.useramount = obj.amount-1;
-                socket.username =  obj.name;
-                socket.userid = obj.userid;
-                //退出并刷新
-                io.emit(obj.userid+'out',{amount:socket.useramount,name:socket.username,userid:socket.userid});
+            socket.useramount = obj.amount-1;
+            socket.username =  obj.name;
+            socket.userid = obj.userid;
+            //退出并刷新
+            io.emit(obj.userid+'out',{amount:socket.useramount,name:socket.username,userid:socket.userid});
 
         })
     });
 
     //接收客户端发送的信息
-    socket.on('chat message', function(msg,color){
-        io.emit('chat message', msg,socket.name,color);
+    socket.on('chat message', function(msg,color,name){
+        io.emit('chat message', msg,socket.name,color,name);
     });
 
     //监听用户退出
     socket.on('disconnect', function(msg){
+
+        console.log(socket.nickname)
         if(onlineUsers.hasOwnProperty(socket.name)) {
             delete onlineUsers[socket.name];
             onlineCount--;
             socket.disconnect();
-            io.emit('back',{amount:socket.useramount, name:socket.username,userid:socket.userid});
+            io.emit('back',{amount:socket.useramount, name:socket.nickname,userid:socket.userid});
             username.splice(socket.userIndex-1, 1);
         }
     });
