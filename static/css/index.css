@@ -1,0 +1,375 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  font-family: Arial, Helvetica, simsun, sans-serif;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: 500;
+}
+ol,
+ul {
+  list-style: none;
+}
+fieldset,
+img {
+  border: 0;
+}
+input,
+select,
+textarea {
+  font-size: 100%;
+}
+ins,
+a {
+  text-decoration: none;
+}
+html * {
+  outline: 0;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+}
+input[type="radio"] {
+  -webkit-appearance: radio;
+}
+html {
+  height: 100%;
+}
+body {
+  width: 6.4rem;
+  margin: 0 auto !important;
+  position: relative;
+}
+#page {
+  width: 100%;
+  height: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+#page .websocket {
+  padding: 0.1rem;
+  background: #000;
+  overflow: hidden;
+}
+#page .websocket span {
+  color: #fff;
+  font-size: 0.24rem;
+  float: left;
+}
+#page .on-s {
+  background: #000;
+  padding: 3px;
+  position: fixed;
+  bottom: 0;
+  width: 6.4rem;
+}
+#page .on-s .label {
+  width: 1rem;
+  height: 0.4rem;
+  font-size: 0.12rem;
+  text-align: center;
+  display: block;
+}
+#page .on-s .label input {
+  width: 1rem;
+  height: 0.3rem;
+  font-size: 0.12rem;
+  text-align: center;
+}
+#page .on-s #m {
+  border: 0;
+  width: 5.12rem;
+  height: 1.16rem;
+  overflow: scroll;
+  margin-right: 0.05rem;
+  display: inherit;
+  float: left;
+  background: #fff;
+  font-size: 0.3rem;
+}
+#page .on-s #m::-webkit-scrollbar {
+  display: none;
+}
+#page .on-s #b {
+  width: 1.16rem;
+  background: #82e0ff;
+  border: none;
+  display: -webkit-box;
+  float: left;
+  height: 0.3rem;
+  margin-right: 0.5rem;
+}
+#page .on-s button {
+  width: 19%;
+  background: #82e0ff;
+  border: none;
+  height: 91px;
+  display: -webkit-box;
+  float: right;
+}
+#page .brow {
+  width: 6.4rem;
+  background: #aaa;
+  position: fixed;
+  bottom: 1.65rem;
+  border-radius: 0.15rem;
+  overflow: scroll;
+}
+#page .brow .brow-c {
+  overflow: hidden;
+  margin-left: 0.04rem;
+}
+#page .brow .brow-c img {
+  width: 0.48rem;
+  height: 0.48rem;
+  float: left;
+  margin-right: 0.05rem;
+  margin-bottom: 0.05rem;
+}
+#page #messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow: scroll;
+  background: #f0eff4;
+}
+#page #messages::-webkit-scrollbar {
+  display: none;
+}
+#page #messages li {
+  font-size: 0.3rem;
+  padding: 5px 10px;
+}
+#page #messages li .name {
+  color: #e17037;
+  float: right;
+}
+#page #messages li .name1 {
+  color: #9b9ca1;
+  float: left;
+  display: block;
+}
+#page #messages li .content {
+  background: #fff;
+  padding: 0.1rem;
+  border-radius: 0.1rem;
+  margin-left: 0.2rem;
+  position: relative;
+  display: inline-block;
+  margin-top: 3px;
+}
+#page #messages li .content:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-right: 10px solid #fff;
+  border-bottom: 5px solid transparent;
+  top: 2px;
+  left: -6px;
+  position: absolute;
+}
+#page #messages li .content1 {
+  background: #fff;
+  padding: 0.1rem;
+  border-radius: 0.1rem;
+  margin-right: 0.2rem;
+  position: relative;
+  display: inline-block;
+  margin-top: 3px;
+  max-width: 5rem;
+  white-space: normal;
+  word-break: break-all;
+  text-align: left;
+}
+#page #messages li .content1:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 10px solid #fff;
+  border-bottom: 5px solid transparent;
+  top: 2px;
+  right: -6px;
+  position: absolute;
+}
+#page #messages .point {
+  color: #999;
+  text-align: center;
+}
+#page #messages .activity {
+  text-align: right;
+}
+#page .login {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 50;
+}
+#page .login .login-cen {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  overflow: hidden;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#page .login .login-cen button {
+  width: 1rem;
+  background: #82e0ff;
+  border: none;
+  height: 0.5rem;
+  display: -webkit-box;
+  float: right;
+}
+#page .login .username {
+  font-size: 0.28rem;
+  color: #000;
+  margin-bottom: 10px;
+  display: block;
+  border-style: solid;
+  border-width: 1px;
+  word-wrap: break-word;
+  line-height: 18px;
+  outline: none;
+}
+#uiPopFrame {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+}
+.ui-pop-frame .ui-pop-main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 0.1rem;
+  overflow: hidden;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 5.3rem;
+  background-color: #fff;
+}
+.ui-pop-frame .ui-pop-main .ui-pop-cont {
+  text-align: center !important;
+  color: #666;
+  font-size: 0.28rem !important;
+  padding: 0.7rem 0.35rem;
+  line-height: 1.5;
+}
+.ui-pop-frame .ui-pop-main .ui-pop-operation {
+  border-top: 1px solid #ccc;
+  display: table;
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+}
+.ui-pop-frame .ui-pop-main .ui-pop-operation a {
+  display: table-cell;
+  text-align: center;
+  line-height: 0.9rem;
+  font-size: 0.32rem;
+  color: #f07e68;
+}
+.ui-pop-wait {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.ui-pop-tit {
+  padding-top: 0.2rem;
+  text-align: center;
+  font-size: 0.36rem;
+}
+.ui-pop-wait .ui-pop-main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 0.1rem;
+  overflow: hidden;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 0.3rem;
+  font-size: 0.28rem;
+  background-color: #fff;
+  color: #000;
+}
+.ui-pop-wait {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.ui-pop-wait .ui-pop-main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 0.3rem;
+  font-size: 0.24rem;
+  color: #fff;
+  background-color: rgba(0,0,0,0.7);
+}

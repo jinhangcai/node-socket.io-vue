@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"/>
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<head>
+    <title>Socket.IO chat</title>
+</head>
+<link rel="stylesheet" href="/css/index.css">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="libs/jquery-emoji/lib/css/bootstrap.css"/>
+<link rel="stylesheet" href="libs/jquery-emoji/lib/css/jquery.mCustomScrollbar.min.css"/>
+<link rel="stylesheet" href="libs/jquery-emoji/dist/css/jquery.emoji.css"/>
+<link rel="stylesheet" href="libs/jquery-emoji/lib/css/railscasts.css"/>
+<link rel="stylesheet" href="libs/jquery-emoji/dist/css/index.css"/>
+<style>
+
+</style>
+<script>
+    (function(){
+        function o(){document.documentElement.style.fontSize=(document.documentElement.clientWidth>640?640:document.documentElement.clientWidth)/6.4+"px"}
+        var e=null;
+        window.addEventListener("resize",function(){clearTimeout(e),e=setTimeout(o,200)},!1),o()
+    })(window);
+</script>
+<body>
+<div id="page" >
+    <div class="login" v-if="login">
+        <div class="login-cen">
+            <input value="" placeholder="请输入用户名" type="text" class="username" v-model="uservalue">
+            <button @click="userClick" id="btnLoad2">确定</button>
+        </div>
+    </div>
+    <div class="websocket" id='websocket' v-show="!login"><span>Websocket多人聊天室</span><span style="float:right;">{{name}} | <a href="javascript:;" style="color: #fff" @click="quit">退出</a></span></div>
+    <ul id="messages">
+        <li v-if="isShowname"><span >欢迎用户{{name}}加入！</span> <span> 当前在线用户{{amount}}人！</span></li>
+        <template  v-for="arr in arr">
+            <li v-if="arr.point==1"  :style="{textAlign : arr.left,color:arr.color}" v-html="arr.left == 'left' ? '<span class=name1>'+arr.name+'</span>' +  '<span class=content>'+  arr.values+'</span>':  '<span class=content1 >'+arr.values +'</span>' + '<span class=name>'+  arr.name +'</span>' "> </li>
+            <li v-if="arr.point==2 && !login" class="point">欢迎{{arr.name}}加入了直播间</li>
+            <li v-if="arr.point==3" class="point">{{arr.name}}离开了直播间</li>
+        </template>
+    </ul>
+    <div class="on-s" id="on-s">
+        <div class="label"><button type="text" value="选择表情"  id="b" style="display:block;">选择表情</button><input id="colorStyle" type="color" placeholder="#000" title="font color" @change="changes($event)"></div>
+        <div contenteditable="true" v-model='values' id="editor" :style="{color:activeColor}"></div>
+        <button @click="InpClk">Send</button>
+    </div>
+</div>
+</body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/zepto.min.js"></script>
+<script src="/static/vue2.js"></script>
+<script src="/static/dialog.js"></script>
+
+<script src="libs/jquery-emoji/lib/script/jquery.min.js"></script>
+<script src="libs/jquery-emoji/lib/script/highlight.pack.js"></script>
+<script src="libs/jquery-emoji/lib/script/jquery.mousewheel-3.0.6.min.js"></script>
+<script src="libs/jquery-emoji/lib/script/jquery.mCustomScrollbar.min.js"></script>
+<script src="libs/jquery-emoji/dist/js/jquery.emoji.min.js"></script>
+<script>
+  var pop = new Pop('wait');
+    Vue.config.silent = true;
+    var socket = io();
+    hljs.initHighlightingOnLoad();
+    new Vue({
+        el: '#page',
+        data: {
+            values:'',          //用户输出的内容
+            uservalue:'',       //发给node的用户名
+            login:true,         //登入界面
+            name:'',            //返回的用户名
+            amount:0,           //在线人数
+            isShowname:false,   //是否显示在线人数
+            impID:'',           //发给node的id
+            expID:'',           //id
+            arr:[],              //聊天记录
+            isleft:true,
+            offss:{},
+            activeColor:'#555'
+        },
+        mounted:function(){
+            var _this = this;
+            var obj = {};
+            socket.on('chat message', function(msg,id,color){
+                obj = {};
+                obj.name = _this.name;
+                obj.values = msg;
+                obj.left = _this.impID == id ? 'right' :'left';
+                obj.color = _this.activeColor;
+                obj.point = 1;
+                _this.arr.push(obj);
+            });
+            socket.on('login', function(msg){
+                obj = {};
+                _this.amount = msg.onlineCount;
+                obj.name = msg.user.username;
+                obj.point = 2;
+                _this.arr.push(obj);
+                _this.resizes()
+
+            });
+            socket.on('disconnect', function () {
+                console.log('服务端断开链接');
+            });
+            socket.on('Registered',function(){
+                pop.run('该用户名已被注册');
+                $('.emoji_container').remove();
+            })
+            $(window).resize(function() {
+                _this.resizes();
+            })
+        },
+        methods:{
+            getuiD:function(){
+                return new Date().getTime()+""+Math.floor(Math.random()*899+100);
+            },
+            InpClk:function(){
+                var _this = this;
+                var html =  $('#editor').html();
+                if(html == '') return;
+                socket.emit('chat message',html,_this.activeColor);
+                $('#editor').html('')
+            },
+            userClick:function(){
+                if(this.uservalue.length <=0 ){
+                    pop.run('用户名不能为空')
+                }else if (this.uservalue.length >4){
+                    pop.run('用户名长度不能超过4位')
+                }else{
+                    this.impID = this.getuiD();
+                    this.logins(this.impID);
+                    this.back(this.impID);
+                    socket.emit('login',{username:this.uservalue,userid:this.impID});
+                    $("#editor").emoji({
+                        button: "#b",
+                        showTab: false,
+                        animation: 'slide',
+                        icons: [{
+                            name: "QQ表情",
+                            path: "libs/jquery-emoji/dist/img/qq/",
+                            maxNum: 91,
+                            excludeNums: [41, 45, 54],
+                            file: ".gif"
+                        }]
+                    });
+                }
+            },
+            logins:function(impID){
+                var _this = this;
+                socket.on(impID, function(msg){
+                    _this.isShowname = true;
+                    _this.login = false;
+                    _this.name = msg.user.username;
+                });
+            },
+            back:function(impID){
+                var _this = this;
+                var obj = {};
+                socket.on(this.impID+'out',function(msg){
+                    if(msg.userid == _this.impID){
+                        socket.disconnect();
+                        location.reload()
+                    }
+                });
+                socket.on('back',function(msg){
+                    obj = {};
+                    _this.amount = msg.amount;
+                    obj.name = msg.name;
+                    obj.point = 3;
+                    _this.arr.push(obj);
+
+                })
+            },
+            quit:function(){
+                //退出
+                var _this = this;
+                socket.emit(this.impID+'out',{amount:_this.amount, name:_this.name,userid:_this.impID});
+            },
+            resizes:function(){
+                $('.emoji_container').remove();
+                setTimeout(function(){
+                    var websocket = document.getElementById('websocket').offsetHeight;
+                    var ons =  document.getElementById('on-s').offsetHeight;
+                    var body  = window.screen.availHeight;
+                    document.getElementById("messages").style.height= body-ons-websocket +"px";
+                    $("#editor").emoji({
+                        button: "#b",
+                        showTab: false,
+                        animation: 'slide',
+                        icons: [{
+                            name: "QQ表情",
+                            path: "libs/jquery-emoji/dist/img/qq/",
+                            maxNum: 91,
+                            excludeNums: [41, 45, 54],
+                            file: ".gif"
+                        }]
+                    });
+                },300);
+            },
+            changes:function(e){
+                this.activeColor =  e.target.value;
+            }
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "jquery-emoji",
+  "homepage": "https://github.com/eshengsky/jQuery-emoji",
+  "_release": "2336aeee98",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "2336aeee9856107e93ef481b34f0dfa9fa96ca55"
+  },
+  "_source": "https://github.com/eshengsky/jQuery-emoji.git",
+  "_target": "*",
+  "_originalSource": "jquery-emoji",
+  "_direct": true
+}

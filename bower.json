@@ -1,0 +1,22 @@
+{
+  "name": "cjh",
+  "description": "websocket+node",
+  "main": "index.js",
+  "authors": [
+    "cjh"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "websocket"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "libs"
+  ]
+}

@@ -1,0 +1,346 @@
+// 清除内外边距
+body,div,
+dl,dt,dd,ul,ol,li,
+h1,h2,h3,h4,h5,h6,
+pre,code,
+form,fieldset,legend,input,textarea,
+p,blockquote,
+th,td,
+hr,button,
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+  margin:0;
+  padding:0
+}
+// 设置默认字体
+html,body {
+  font-family:Arial, Helvetica, simsun, sans-serif;
+}
+// 表格内填充和边框
+table {
+  border-collapse:collapse;
+  border-spacing:0
+}
+// 标题字体默认大小
+h1,h2,h3,h4,h5,h6 {
+  font-size:100%;
+  font-weight:500
+}
+// 列表初始化
+ol,ul {
+  list-style:none
+}
+// 去除默认边框
+fieldset,img {
+  border:0
+}
+input,select,textarea {
+  font-size:100%
+}
+ins,a {
+  text-decoration:none
+}
+// 默认蓝色边框 以及 tap 阴影
+html * {
+  outline:0;
+  -webkit-text-size-adjust:none;
+  -webkit-tap-highlight-color:rgba(0,0,0,0)
+}
+// 默认表单元素样式
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+}
+input[type="radio"] {
+  -webkit-appearance: radio;
+}
+html{height:100%;}
+body{
+  width 6.4rem
+  margin 0 auto !important
+  position relative
+}
+#page{
+  width:100%;
+  height:100%;
+  max-width: 640px;
+  margin: 0 auto;
+  overflow: hidden;
+  .websocket{
+    padding .1rem
+    background #000
+    overflow hidden
+
+    span{
+      color #fff
+      font-size .24rem
+      float left
+    }
+  }
+  .on-s{
+    background: #000;
+    padding: 3px;
+    position: fixed;
+    bottom: 0;
+    width: 6.4rem
+    .label{
+      width: 1rem;
+      height: .4rem;
+      font-size: .12rem;
+      text-align: center;
+      display block
+      input{
+        width: 1rem;
+        height: .3rem;
+        font-size: .12rem;
+        text-align: center;
+      }
+    }
+    #m{
+      border: 0;
+      width: 5.12rem;
+      height 1.16rem
+      overflow scroll
+      margin-right: 0.05rem
+      display inherit
+      float left
+      background #fff
+      font-size .3rem
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    #b{
+      width: 1.16rem;
+      background: rgb(130, 224, 255);
+      border: none;
+      display -webkit-box
+      float left
+      height .3rem
+      margin-right .5rem
+    }
+    button{
+      width: 19%
+      background: rgb(130, 224, 255);
+      border: none;
+      height 91px
+      display -webkit-box
+      float right
+
+    }
+  }
+  .brow{
+    width: 6.4rem;
+    background rgb(170,170,170)
+    position: fixed;
+    bottom: 1.65rem;
+    border-radius: .15rem;
+    overflow scroll;
+    .brow-c{
+      overflow hidden;
+      margin-left .04rem
+      img{
+        width .48rem
+        height .48rem
+        float left
+        margin-right .05rem
+        margin-bottom .05rem
+      }
+    }
+  }
+  #messages{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width 100%
+    //height 9rem
+    overflow scroll
+    background rgb(240,239,244)
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    li{
+      font-size .3rem
+      padding: 5px 10px;
+      .name{
+        color  rgb(225,112,55)
+        float right
+      }
+      .name1{
+        color  rgb(155,156,161)
+        float left
+        display block
+      }
+      .content{
+        background #ffffff
+        padding .1rem
+        border-radius .1rem
+        margin-left .2rem
+        position relative
+        display inline-block
+        margin-top 3px
+        &:before{
+          content ''
+          width: 0;
+          height: 0;
+          border-top: 5px solid transparent;
+          border-right:10px solid #fff;
+          border-bottom: 5px solid transparent;
+          top 2px
+          left -6px
+          position absolute
+        }
+      }
+      .content1{
+        background #fff
+        padding .1rem
+        border-radius .1rem
+        margin-right .2rem
+        position relative
+        display inline-block
+        margin-top 3px
+        max-width 5rem
+        white-space:normal
+        word-break:break-all
+        text-align left
+        &:before{
+          content ''
+          width: 0;
+          height: 0;
+          border-top: 5px solid transparent;
+          border-left:10px solid #fff;
+          border-bottom: 5px solid transparent;
+          top 2px
+          right -6px
+          position absolute
+        }
+      }
+    }
+    .point{
+      color #999
+      text-align center
+    }
+    .activity{
+      text-align right
+    }
+  }
+  .login{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 50;
+    .login-cen{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      overflow: hidden;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      button{
+        width: 1rem;
+        background: rgb(130, 224, 255);
+        border: none;
+        height .5rem
+        display -webkit-box
+        float right
+      }
+    }
+    .username{
+      font-size: 0.28rem;
+      color: #000;
+      margin-bottom 10px
+      display block
+      border-style: solid;
+      border-width: 1px;
+      word-wrap: break-word;
+      line-height: 18px;
+      outline: none;
+    }
+  }
+}
+
+// 弹窗
+#uiPopFrame {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+}
+.ui-pop-frame .ui-pop-main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 0.1rem;
+  overflow: hidden;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 5.3rem;
+  background-color: #fff;
+}
+.ui-pop-frame .ui-pop-main .ui-pop-cont {
+  text-align: center !important;
+  color: #666;
+  font-size: 0.28rem !important;
+  padding: 0.7rem 0.35rem;
+  line-height: 1.5;
+}
+.ui-pop-frame .ui-pop-main .ui-pop-operation {
+  border-top: 1px solid #ccc;
+  display: table;
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+}
+.ui-pop-frame .ui-pop-main .ui-pop-operation a {
+  display: table-cell;
+  text-align: center;
+  line-height: 0.9rem;
+  font-size: 0.32rem;
+  color: #f07e68;
+}
+.ui-pop-wait {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.ui-pop-tit{
+  padding-top .2rem
+  text-align center
+  font-size .36rem
+}
+.ui-pop-wait .ui-pop-main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 0.1rem;
+  overflow: hidden;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 0.3rem;
+  font-size: 0.28rem;
+  background-color: #fff;
+  color: #000;
+}
+.ui-pop-wait {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.ui-pop-wait .ui-pop-main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 0.3rem;
+  font-size: 0.24rem;
+  color: #fff;
+  background-color: rgba(0,0,0,0.7);
+}
